@@ -4,13 +4,23 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
-1. Install dependencies
+1. Set up environment variables
+
+   Create a `.env` file in the root of the project and add the following:
+
+   ```
+   EXPO_PUBLIC_A4F_API_KEY="YOUR_A4F_API_KEY_HERE"
+   ```
+
+   Replace `"YOUR_A4F_API_KEY_HERE"` with your actual A4F API key.
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the app
 
    ```bash
    npx expo start

@@ -111,7 +111,7 @@ export default function Gallery() {
         <View
           style={{
             width: width * 0.8,
-            height: (width * 0.8 * 19) / 6,
+            height: (width * 0.8 * 19) / 10,
             backgroundColor: '#2a2a2a',
             borderRadius: 20,
             marginBottom: 30,
@@ -209,7 +209,7 @@ export default function Gallery() {
           ) : (
             gallery.map((image: any, index: number) => {
               const isLeft = index % 2 === 0;
-              const height = 200 + (index % 3) * 50;
+              const height = 200 + (index % 3) * 40;
 
               return (
                 <TouchableOpacity

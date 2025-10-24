@@ -1,55 +1,74 @@
-import { useEffect } from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import {
+  View,
+  Text,
+  StatusBar,
+  ImageBackground,
+  Animated,
+  Dimensions,
+} from 'react-native';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
+import LottieView from 'lottie-react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export default function SplashScreen() {
   const router = useRouter();
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    // Fade in animation
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start();
+
+    // Navigate after a delay
     const timer = setTimeout(() => {
       router.replace('/gallery');
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [router]);
 
   return (
-    <LinearGradient
-      colors={['#FF6B35', '#F7931E', '#FF4500']}
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+    <ImageBackground
+      source={require('../assets/images/splash.png')} // 👈 place your AI/futuristic art image here
+      style={{
+        flex: 1,
+        width,
+        height,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      resizeMode='cover'
     >
       <StatusBar barStyle='light-content' />
-      <View style={{ alignItems: 'center' }}>
-        <View
-          style={{
-            width: 120,
-            height: 120,
-            borderRadius: 60,
-            backgroundColor: 'rgba(255,255,255,0.2)',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginBottom: 40,
-          }}
-        >
-          <Text style={{ fontSize: 48, fontWeight: 'bold', color: '#fff' }}>
-            AI
-          </Text>
-        </View>
-        <Text
-          style={{
-            fontSize: 32,
-            fontWeight: 'bold',
-            color: '#fff',
-            marginBottom: 10,
-          }}
-        >
-          AI Wallpapers
-        </Text>
-        <Text style={{ fontSize: 16, color: '#fff', opacity: 0.9 }}>
-          Discover the Serenity of the Wild
-        </Text>
-      </View>
-    </LinearGradient>
+
+      {/* Lottie Animation Overlay */}
+      {/* <LottieView
+        source={require('../assets/particles.json')} // 👈 particles/glow Lottie animation file
+        autoPlay
+        loop
+        style={{
+          position: 'absolute',
+          width,
+          height,
+          zIndex: 1,
+        }}
+      /> */}
+
+      {/* Text Container with Blur */}
+      <Animated.View
+        style={{
+          opacity: fadeAnim,
+          zIndex: 2,
+          alignItems: 'center',
+        }}
+      >
+      </Animated.View>
+    </ImageBackground>
   );
 }

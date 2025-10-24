@@ -38,8 +38,9 @@ export default function Preview() {
           source={{ uri: imageUrl as string }}
           style={{
             width: width * 0.9,
-            height: (width * 0.9 * 19) / 6,
+            height: (width * 0.9 * 19) / 10,
             borderRadius: 20,
+            marginTop: 30,
             alignSelf: 'center',
           }}
           resizeMode="cover"
@@ -63,6 +64,7 @@ export default function Preview() {
           flexDirection: 'row',
           padding: 20,
           gap: 10,
+          marginBottom: 20,
         }}
       >
         <TouchableOpacity

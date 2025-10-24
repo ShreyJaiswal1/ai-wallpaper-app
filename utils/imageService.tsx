@@ -3,7 +3,7 @@ import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system';
 
 const STORAGE_KEY = '@wallpaper_gallery';
-const A4F_API_KEY = process.env.EXPO_PUBLIC_A4F_API_KEY; // Replace with your actual API key in a .env file
+const A4F_API_KEY = process.env.EXPO_PUBLIC_A4F_API_KEY;
 
 export interface WallpaperImage {
   id: string;
@@ -26,7 +26,7 @@ export const loadGallery = async (): Promise<WallpaperImage[]> => {
   }
 };
 
-// Save gallery to AsyncStorage. For a larger gallery, a more robust solution like a local database (e.g., SQLite or Realm) would be better.
+// Save gallery to AsyncStorage
 export const saveGallery = async (gallery: WallpaperImage[]): Promise<void> => {
   try {
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(gallery));
@@ -50,7 +50,7 @@ export const generateImage = async (
         model: 'provider-4/imagen-4',
         prompt: prompt,
         n: 1,
-        size: '1024x1792', // 6:19 aspect ratio approximation
+        size: '1024x1792',
       }),
     });
 
@@ -78,13 +78,20 @@ export const saveToDeviceGallery = async (
   imageUrl: string
 ): Promise<boolean> => {
   try {
-    const { status } = await MediaLibrary.requestPermissionsAsync(false);
+    const { status } = await MediaLibrary.requestPermissionsAsync(true);
     if (status !== 'granted') {
+      console.log('Permission to access media library denied');
       return false;
     }
 
-    const fileUri =
-      FileSystem.documentDirectory + `wallpaper_${Date.now()}.jpg`;
+    // FIX: Add type assertion and null check for documentDirectory
+    const docDirectory = FileSystem.documentDirectory;
+    if (!docDirectory) {
+      console.error('Document directory is not available');
+      return false;
+    }
+
+    const fileUri = `${docDirectory}wallpaper_${Date.now()}.jpg`;
     const downloadResult = await FileSystem.downloadAsync(imageUrl, fileUri);
 
     await MediaLibrary.createAssetAsync(downloadResult.uri);

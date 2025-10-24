@@ -30,8 +30,8 @@ export default function Preview() {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#1a1a1a' }}>
-      <StatusBar barStyle="light-content" />
-      
+      <StatusBar barStyle='light-content' />
+
       {/* Image Preview */}
       <View style={{ flex: 1, padding: 20, justifyContent: 'center' }}>
         <Image
@@ -43,7 +43,7 @@ export default function Preview() {
             marginTop: 30,
             alignSelf: 'center',
           }}
-          resizeMode="cover"
+          resizeMode='cover'
         />
         <Text
           style={{
@@ -84,7 +84,7 @@ export default function Preview() {
         <TouchableOpacity
           style={{
             flex: 1,
-            backgroundColor: '#FF6B35',
+            backgroundColor: '#7aa4b4ff',
             padding: 18,
             borderRadius: 12,
             alignItems: 'center',

@@ -117,7 +117,7 @@ export default function Gallery() {
             marginBottom: 30,
           }}
         >
-          <ActivityIndicator size='large' color='#FF6B35' style={{ flex: 1 }} />
+          <ActivityIndicator size='large' color='#7bd4efff' style={{ flex: 1 }} />
         </View>
         <Text style={{ color: '#fff', fontSize: 18, marginBottom: 10 }}>
           Creating your wallpaper...
@@ -168,7 +168,7 @@ export default function Gallery() {
           />
           <TouchableOpacity
             style={{
-              backgroundColor: '#FF6B35',
+              backgroundColor: '#7aa4b4ff',
               paddingHorizontal: 24,
               paddingVertical: 12,
               borderRadius: 10,

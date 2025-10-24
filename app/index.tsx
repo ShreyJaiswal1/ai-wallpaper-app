@@ -8,8 +8,6 @@ import {
   Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { BlurView } from 'expo-blur';
-import LottieView from 'lottie-react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -46,19 +44,6 @@ export default function SplashScreen() {
       resizeMode='cover'
     >
       <StatusBar barStyle='light-content' />
-
-      {/* Lottie Animation Overlay */}
-      {/* <LottieView
-        source={require('../assets/particles.json')} // 👈 particles/glow Lottie animation file
-        autoPlay
-        loop
-        style={{
-          position: 'absolute',
-          width,
-          height,
-          zIndex: 1,
-        }}
-      /> */}
 
       {/* Text Container with Blur */}
       <Animated.View

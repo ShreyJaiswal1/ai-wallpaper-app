@@ -1,40 +1,55 @@
 {
   "expo": {
-    "name": "AI Wallpaper App",
-    "slug": "ai-wallpaper-app",
+    "name": "AI Wallpapers",
+    "slug": "ai-wallpapers",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "ai-wallpapers",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FF6B35"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.chroma.aiwallpapers",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to save wallpapers.",
+        "NSPhotoLibraryAddUsageDescription": "This app needs permission to save wallpapers to your photo library."
+      }
+    },
+    "android": {
+      "package": "com.chroma.aiwallpapers",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/logo.png",
+        "backgroundColor": "#FF6B35"
+      },
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.MANAGE_EXTERNAL_STORAGE",
+        "android.permission.INTERNET"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/logo.png"
+    },
     "plugins": [
       [
         "expo-media-library",
         {
-          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
-          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "photosPermission": "Allow AI Wallpapers to save images to your photo library.",
+          "savePhotosPermission": "Allow AI Wallpapers to save wallpapers to your photos.",
           "isAccessMediaLocationEnabled": true
         }
       ]
-    ],
-    "android": {
-      "permissions": [
-        "android.permissions.READ_EXTERNAL_STORAGE",
-        "android.permissions.WRITE_EXTERNAL_STORAGE",
-        "android.permissions.READ_MEDIA_IMAGES",
-        "android.permissions.ACCESS_MEDIA_LOCATION"
-            ],
-      "package": "com.shrey.wallpaper"
-    },
-    "ios": {
-      "infoPlist": {
-        "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to access your photos.",
-        "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos."
-      }
-    },
-    "extra": {
-      "eas": {
-        "projectId": "af8b199b-8468-462b-8209-3c81a3c5b2e2"
-      }
-    }
+    ]
   }
 }

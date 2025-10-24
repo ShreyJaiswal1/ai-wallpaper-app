@@ -3,7 +3,7 @@ import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system/legacy';
 
 const STORAGE_KEY = '@wallpaper_gallery';
-const A4F_API_KEY = 'YOUR_A4F_API_KEY_HERE'; // Replace with your actual API key
+const A4F_API_KEY = process.env.EXPO_PUBLIC_A4F_API_KEY;
 
 export interface WallpaperImage {
   id: string;

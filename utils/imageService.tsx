@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as MediaLibrary from 'expo-media-library';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 
 const STORAGE_KEY = '@wallpaper_gallery';
-const A4F_API_KEY = process.env.EXPO_PUBLIC_A4F_API_KEY;
+const A4F_API_KEY = 'YOUR_A4F_API_KEY_HERE'; // Replace with your actual API key
 
 export interface WallpaperImage {
   id: string;
@@ -50,7 +50,7 @@ export const generateImage = async (
         model: 'provider-4/imagen-4',
         prompt: prompt,
         n: 1,
-        size: '1024x1792',
+        size: '1024x1792', // 6:19 aspect ratio approximation
       }),
     });
 
@@ -69,7 +69,7 @@ export const generateImage = async (
     return null;
   } catch (error) {
     console.error('Error generating image:', error);
-    throw new Error('Failed to generate image. Please try again.');
+    return null;
   }
 };
 
@@ -80,18 +80,12 @@ export const saveToDeviceGallery = async (
   try {
     const { status } = await MediaLibrary.requestPermissionsAsync(true);
     if (status !== 'granted') {
-      console.log('Permission to access media library denied');
+      console.error('Media library permission not granted');
       return false;
     }
 
-    // FIX: Add type assertion and null check for documentDirectory
-    const docDirectory = FileSystem.documentDirectory;
-    if (!docDirectory) {
-      console.error('Document directory is not available');
-      return false;
-    }
-
-    const fileUri = `${docDirectory}wallpaper_${Date.now()}.jpg`;
+    const fileUri =
+      FileSystem.documentDirectory + `wallpaper_${Date.now()}.jpg`;
     const downloadResult = await FileSystem.downloadAsync(imageUrl, fileUri);
 
     await MediaLibrary.createAssetAsync(downloadResult.uri);
